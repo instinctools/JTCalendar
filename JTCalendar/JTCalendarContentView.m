@@ -172,14 +172,26 @@
 	}
 }
 
+- (void)setWeekHighlighted:(BOOL)hihglighted {
+	self.highlightWeek = hihglighted;
+}
+
+- (void)setWeekHighlightedColor:(UIColor *)color {
+	self.highlightWeekColor = color;
+}
+
 - (void)calendarMonthView:(JTCalendarMonthView *)calendarMonthView didBeginTouchCalendarMonthView:(JTCalendarWeekView *)calendarWeekView withCalendarDayView:(JTCalendarDayView *)calendarDayView {
-	calendarWeekView.backgroundColor = self.highlightWeekColor;
+	if (self.highlightWeek) {
+		calendarWeekView.backgroundColor = self.highlightWeekColor;
+	}
 }
 
 - (void)calendarMonthView:(JTCalendarMonthView *)calendarMonthView didEndTouchCalendarMonthView:(JTCalendarWeekView *)calendarWeekView withCalendarDayView:(JTCalendarDayView *)calendarDayView {
-	[UIView animateWithDuration:0.3 animations: ^{
-	    calendarWeekView.backgroundColor = calendarMonthView.backgroundColor;
-	}];
+	if (self.highlightWeek) {
+		[UIView animateWithDuration:0.3 animations: ^{
+		    calendarWeekView.backgroundColor = calendarMonthView.backgroundColor;
+		}];
+	}
 }
 
 @end
