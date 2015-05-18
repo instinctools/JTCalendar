@@ -9,10 +9,16 @@
 
 #import "JTCalendar.h"
 
+@class JTCalendarDayView;
+
+@protocol JTCalendarDayViewDelegate <NSObject>
+- (void)calendarDayViewDidBeginTouch:(JTCalendarDayView *)calendarDayView;
+- (void)calendarDayViewDidEndTouch:(JTCalendarDayView *)calendarDayView;
+@end
 @interface JTCalendarDayView : UIView
 
 @property (weak, nonatomic) JTCalendar *calendarManager;
-
+@property (nonatomic, weak) id <JTCalendarDayViewDelegate> delegate;
 @property (nonatomic) NSDate *date;
 @property (assign, nonatomic) BOOL isOtherMonth;
 

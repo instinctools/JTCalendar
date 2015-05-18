@@ -9,10 +9,19 @@
 
 #import "JTCalendar.h"
 
+@class JTCalendarWeekView;
+@class JTCalendarDayView;
+
+@protocol JTCalendarWeekViewDelegate <NSObject>
+
+- (void)calendarWeekView:(JTCalendarWeekView *)calendarWeekView didBeginTouchCalendarDayView:(JTCalendarDayView *)calendarDayView;
+- (void)calendarWeekView:(JTCalendarWeekView *)calendarWeekView didEndTouchCalendarDayView:(JTCalendarDayView *)calendarDayView;
+
+@end
 @interface JTCalendarWeekView : UIView
 
 @property (weak, nonatomic) JTCalendar *calendarManager;
-
+@property (nonatomic, weak) id <JTCalendarWeekViewDelegate> delegate;
 @property (assign, nonatomic) NSUInteger currentMonthIndex;
 
 - (void)setBeginningOfWeek:(NSDate *)date;
