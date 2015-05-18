@@ -113,6 +113,11 @@
 	}
 }
 
+-(void)setIsSelected:(BOOL)isSelected
+{
+    self.backgroundColor = isSelected == YES ? self.calendarManager.calendarAppearance.highlightWeekColor : self.calendarManager.calendarAppearance.unhighlightWeekColor;
+}
+
 - (void)reloadAppearance {
 	for (JTCalendarDayView *view in daysViews) {
 		[view reloadAppearance];

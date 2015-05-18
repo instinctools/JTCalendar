@@ -18,6 +18,4 @@
 
 - (void)reloadData;
 - (void)reloadAppearance;
-- (void)setWeekHighlighted:(BOOL)hihglighted;
-- (void)setWeekHighlightedColor:(UIColor *)color;
 @end

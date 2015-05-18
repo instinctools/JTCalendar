@@ -25,6 +25,10 @@
 
 - (void)setDefaultValues
 {
+    
+    self.highlightWeekColor = [UIColor yellowColor];
+    self.unhighlightWeekColor = [UIColor whiteColor];
+    self.highlightWeek = NO;
     self.isWeekMode = NO;
     
     self.weekDayFormat = JTCalendarWeekDayFormatShort;

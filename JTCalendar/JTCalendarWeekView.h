@@ -23,6 +23,7 @@
 @property (weak, nonatomic) JTCalendar *calendarManager;
 @property (nonatomic, weak) id <JTCalendarWeekViewDelegate> delegate;
 @property (assign, nonatomic) NSUInteger currentMonthIndex;
+@property (nonatomic) BOOL isSelected;
 
 - (void)setBeginningOfWeek:(NSDate *)date;
 - (void)reloadData;

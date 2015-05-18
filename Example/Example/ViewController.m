@@ -29,6 +29,8 @@
         self.calendar.calendarAppearance.ratioContentMenu = 2.;
         self.calendar.calendarAppearance.focusSelectedDayChangeMode = YES;
         
+        self.calendar.calendarAppearance.highlightWeek = YES;
+        self.calendar.calendarAppearance.highlightWeekColor = [UIColor orangeColor];
         // Customize the text for each month
         self.calendar.calendarAppearance.monthBlock = ^NSString *(NSDate *date, JTCalendar *jt_calendar){
             NSCalendar *calendar = jt_calendar.calendarAppearance.calendar;

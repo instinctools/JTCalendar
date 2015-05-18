@@ -207,7 +207,7 @@ static NSString *const kJTCalendarDaySelected = @"kJTCalendarDaySelected";
 			textLabel.textColor = [self.calendarManager.calendarAppearance dayTextColorSelectedOtherMonth];
 			dotView.color = [self.calendarManager.calendarAppearance dayDotColorSelectedOtherMonth];
 		}
-
+        [self.delegate calendarDayViewDidBeginTouch:self];
 		circleView.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0.1, 0.1);
 		tr = CGAffineTransformIdentity;
 	}
@@ -257,7 +257,7 @@ static NSString *const kJTCalendarDaySelected = @"kJTCalendarDaySelected";
 	dotView.hidden = ![self.calendarManager.dataCache haveEvent:self.date];
 
 	BOOL selected = [self isSameDate:[self.calendarManager currentDateSelected]];
-	[self setSelected:selected animated:NO];
+    [self setSelected:selected animated:NO];
 }
 
 - (BOOL)isToday {

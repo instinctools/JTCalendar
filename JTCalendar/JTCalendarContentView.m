@@ -17,9 +17,8 @@
 @interface JTCalendarContentView () <JTCalendarMonthViewDelegate> {
 	NSMutableArray *monthsViews;
 }
-
-@property (nonatomic) BOOL highlightWeek;
-@property (nonatomic, strong) UIColor *highlightWeekColor;
+@property (nonatomic, strong) JTCalendarWeekView *previousSelectedWeekView;
+@property (nonatomic, strong) JTCalendarMonthView *previousSelectedMonthView;
 @end
 
 @implementation JTCalendarContentView
@@ -60,7 +59,6 @@
 		[self addSubview:monthView];
 		[monthsViews addObject:monthView];
 	}
-	self.highlightWeekColor = [UIColor yellowColor];
 }
 
 - (void)layoutSubviews {
@@ -172,26 +170,18 @@
 	}
 }
 
-- (void)setWeekHighlighted:(BOOL)hihglighted {
-	self.highlightWeek = hihglighted;
-}
-
-- (void)setWeekHighlightedColor:(UIColor *)color {
-	self.highlightWeekColor = color;
-}
-
 - (void)calendarMonthView:(JTCalendarMonthView *)calendarMonthView didBeginTouchCalendarMonthView:(JTCalendarWeekView *)calendarWeekView withCalendarDayView:(JTCalendarDayView *)calendarDayView {
-	if (self.highlightWeek) {
-		calendarWeekView.backgroundColor = self.highlightWeekColor;
-	}
+    if (self.calendarManager.calendarAppearance.highlightWeek) {
+        if (self.previousSelectedWeekView != nil) {
+            self.previousSelectedWeekView.isSelected = NO;
+        }
+        calendarWeekView.isSelected = YES;
+        self.previousSelectedWeekView = calendarWeekView;
+        self.previousSelectedMonthView = calendarMonthView;
+    }
 }
 
 - (void)calendarMonthView:(JTCalendarMonthView *)calendarMonthView didEndTouchCalendarMonthView:(JTCalendarWeekView *)calendarWeekView withCalendarDayView:(JTCalendarDayView *)calendarDayView {
-	if (self.highlightWeek) {
-		[UIView animateWithDuration:0.3 animations: ^{
-		    calendarWeekView.backgroundColor = calendarMonthView.backgroundColor;
-		}];
-	}
 }
 
 @end
