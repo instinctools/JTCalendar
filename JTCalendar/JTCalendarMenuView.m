@@ -81,6 +81,7 @@
         x = (self.frame.size.width - width) / 2.;
     }
     
+    
     if(self.calendarManager.calendarAppearance.readFromRightToLeft){
         for(UIView *view in [[monthsViews reverseObjectEnumerator] allObjects]){
             view.frame = CGRectMake(x, 0, width, height);

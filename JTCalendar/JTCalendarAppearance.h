@@ -227,6 +227,7 @@ typedef NSString *(^JTCalendarMonthBlock)(NSDate *date, JTCalendar *jt_calendar)
 - (void)setDayTextColorForAll:(UIColor *)textColor;
 
 @property (nonatomic) BOOL highlightWeek;
+@property (nonatomic) BOOL showDefaultMenu;
 @property (nonatomic, strong) UIColor *highlightWeekColor;
 @property (nonatomic, strong) UIColor *unhighlightWeekColor;
 @end

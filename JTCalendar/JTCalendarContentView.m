@@ -18,7 +18,6 @@
 	NSMutableArray *monthsViews;
 }
 @property (nonatomic, strong) JTCalendarWeekView *previousSelectedWeekView;
-@property (nonatomic, strong) JTCalendarMonthView *previousSelectedMonthView;
 @end
 
 @implementation JTCalendarContentView
@@ -177,7 +176,6 @@
         }
         calendarWeekView.isSelected = YES;
         self.previousSelectedWeekView = calendarWeekView;
-        self.previousSelectedMonthView = calendarMonthView;
     }
 }
 
