@@ -136,6 +136,7 @@ static NSString *const kJTCalendarDaySelected = @"kJTCalendarDaySelected";
 }
 
 - (void)didTouch:(UITapGestureRecognizer *)recognizer {
+    [self.delegate calendarDayViewDidBeginTouch:self];
 	if ([self.calendarManager.dataSource respondsToSelector:@selector(calendar:canSelectDate:)]) {
 		if (![self.calendarManager.dataSource calendar:self.calendarManager canSelectDate:self.date]) {
 			return;
@@ -195,14 +196,13 @@ static NSString *const kJTCalendarDaySelected = @"kJTCalendarDaySelected";
 			circleView.color = [self.calendarManager.calendarAppearance dayCircleColorSelected];
 			textLabel.textColor = [self.calendarManager.calendarAppearance dayTextColorSelected];
 			dotView.color = [self.calendarManager.calendarAppearance dayDotColorSelected];
-            [self.delegate calendarDayViewDidBeginTouch:self];
+            
 		}
 		else {
 			circleView.color = [self.calendarManager.calendarAppearance dayCircleColorSelectedOtherMonth];
 			textLabel.textColor = [self.calendarManager.calendarAppearance dayTextColorSelectedOtherMonth];
 			dotView.color = [self.calendarManager.calendarAppearance dayDotColorSelectedOtherMonth];
 		}
-        
 		circleView.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0.1, 0.1);
 		tr = CGAffineTransformIdentity;
 	}
@@ -241,6 +241,15 @@ static NSString *const kJTCalendarDaySelected = @"kJTCalendarDaySelected";
 		circleView.layer.opacity = opacity;
 		circleView.transform = tr;
 	}
+    
+    if ( self.calendarManager.calendarAppearance.isFutureDaysAreAvailable == NO && [self.date timeIntervalSinceNow] > 0)
+    {
+        textLabel.textColor = [UIColor lightGrayColor];
+        self.userInteractionEnabled = NO;
+    }
+    else {
+        self.userInteractionEnabled = YES;
+    }
 }
 
 - (void)setIsOtherMonth:(BOOL)isOtherMonth {
@@ -249,10 +258,9 @@ static NSString *const kJTCalendarDaySelected = @"kJTCalendarDaySelected";
 }
 
 - (void)reloadData {
-	dotView.hidden = ![self.calendarManager.dataCache haveEvent:self.date];
-
 	BOOL selected = [self isSameDate:[self.calendarManager currentDateSelected]];
     [self setSelected:selected animated:NO];
+    dotView.hidden = ![self.calendarManager.dataCache haveEvent:self.date];
 }
 
 - (BOOL)isToday {

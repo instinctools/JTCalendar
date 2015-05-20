@@ -98,6 +98,13 @@
 	}
 }
 
+- (NSArray *)dates {
+    NSMutableArray *array = [[NSMutableArray alloc] init];
+    for (JTCalendarDayView *view in daysViews) {
+        [array addObject:view.date];
+    }
+    return array;
+}
 #pragma mark - JTCalendarManager
 
 - (void)setCalendarManager:(JTCalendar *)calendarManager {
@@ -108,6 +115,7 @@
 }
 
 - (void)reloadData {
+    self.isSelected = NO;
 	for (JTCalendarDayView *view in daysViews) {
 		[view reloadData];
 	}

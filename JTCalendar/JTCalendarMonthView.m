@@ -142,14 +142,14 @@
 }
 
 - (void)reloadData {
-	for (JTCalendarWeekView *view in weeksViews) {
-		[view reloadData];
-
-		// Doesn't need to do other weeks
-		if (self.calendarManager.calendarAppearance.isWeekMode) {
-			break;
-		}
-	}
+    for (JTCalendarWeekView *view in weeksViews) {
+        [view reloadData];
+        view.isSelected = [view.dates containsObject:self.calendarManager.selectedDate];
+        // Doesn't need to do other weeks
+        if (self.calendarManager.calendarAppearance.isWeekMode) {
+            break;
+        }
+    }
 }
 
 - (void)reloadAppearance {

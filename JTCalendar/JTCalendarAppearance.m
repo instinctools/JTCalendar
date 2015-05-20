@@ -25,7 +25,7 @@
 
 - (void)setDefaultValues
 {
-    
+    self.isFutureDaysAreAvailable = YES;
     self.highlightWeekColor = [UIColor yellowColor];
     self.unhighlightWeekColor = [UIColor whiteColor];
     self.highlightWeek = NO;

@@ -28,7 +28,7 @@
         self.calendar.calendarAppearance.dayCircleRatio = 9. / 10.;
         self.calendar.calendarAppearance.ratioContentMenu = 1.;
         self.calendar.calendarAppearance.focusSelectedDayChangeMode = YES;
-        
+        self.calendar.calendarAppearance.isFutureDaysAreAvailable = NO;
         self.calendar.calendarAppearance.highlightWeek = YES;
         self.calendar.calendarAppearance.highlightWeekColor = [UIColor orangeColor];
         // Customize the text for each month

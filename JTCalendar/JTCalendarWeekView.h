@@ -28,5 +28,5 @@
 - (void)setBeginningOfWeek:(NSDate *)date;
 - (void)reloadData;
 - (void)reloadAppearance;
-
+- (NSArray *)dates;
 @end

@@ -230,4 +230,5 @@ typedef NSString *(^JTCalendarMonthBlock)(NSDate *date, JTCalendar *jt_calendar)
 @property (nonatomic) BOOL showDefaultMenu;
 @property (nonatomic, strong) UIColor *highlightWeekColor;
 @property (nonatomic, strong) UIColor *unhighlightWeekColor;
+@property (nonatomic) BOOL isFutureDaysAreAvailable;
 @end

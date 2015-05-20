@@ -11,6 +11,7 @@
 
 #import "JTCalendarMonthView.h"
 #import "JTCalendarWeekView.h"
+#import "JTCalendarDayView.h"
 
 #define NUMBER_PAGES_LOADED 5 // Must be the same in JTCalendarView, JTCalendarMenuView, JTCalendarContentView
 
@@ -18,6 +19,7 @@
 	NSMutableArray *monthsViews;
 }
 @property (nonatomic, strong) JTCalendarWeekView *previousSelectedWeekView;
+@property (nonatomic, strong) NSDate *selectedDate;
 @end
 
 @implementation JTCalendarContentView
@@ -171,11 +173,8 @@
 
 - (void)calendarMonthView:(JTCalendarMonthView *)calendarMonthView didBeginTouchCalendarMonthView:(JTCalendarWeekView *)calendarWeekView withCalendarDayView:(JTCalendarDayView *)calendarDayView {
     if (self.calendarManager.calendarAppearance.highlightWeek) {
-        if (self.previousSelectedWeekView != nil) {
-            self.previousSelectedWeekView.isSelected = NO;
-        }
-        calendarWeekView.isSelected = YES;
-        self.previousSelectedWeekView = calendarWeekView;
+        self.calendarManager.selectedDate = calendarDayView.date;
+        [calendarMonthView reloadData];
     }
 }
 
