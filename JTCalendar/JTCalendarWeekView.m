@@ -101,7 +101,11 @@
 - (NSArray *)dates {
     NSMutableArray *array = [[NSMutableArray alloc] init];
     for (JTCalendarDayView *view in daysViews) {
-        [array addObject:view.date];
+        unsigned int flags = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit;
+        NSCalendar* calendar = [NSCalendar currentCalendar];
+        NSDateComponents* components = [calendar components:flags fromDate:view.date];
+        NSDate* dateOnly = [calendar dateFromComponents:components];
+        [array addObject:dateOnly];
     }
     return array;
 }

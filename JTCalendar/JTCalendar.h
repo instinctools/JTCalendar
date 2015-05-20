@@ -39,4 +39,5 @@
 
 - (void)repositionViews;
 
+- (void)selectWeekWithDate:(NSDate *)date;
 @end

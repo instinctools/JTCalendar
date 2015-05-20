@@ -62,6 +62,12 @@
     [self.calendar reloadData];
 }
 
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [self.calendar selectWeekWithDate:[NSDate date]];
+}
+
 - (void)viewDidLayoutSubviews
 {
     [self.calendar repositionViews];

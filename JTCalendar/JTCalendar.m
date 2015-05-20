@@ -109,6 +109,12 @@
     [self.contentView reloadData];
 }
 
+-(void)selectWeekWithDate:(NSDate *)date
+{
+    [self setCurrentDate:date];
+    [self.contentView selectWeekWithDate:date];
+}
+
 #pragma mark - UIScrollView delegate
 
 - (void)scrollViewDidScroll:(UIScrollView *)sender

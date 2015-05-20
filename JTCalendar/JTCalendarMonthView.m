@@ -144,7 +144,14 @@
 - (void)reloadData {
     for (JTCalendarWeekView *view in weeksViews) {
         [view reloadData];
-        view.isSelected = [view.dates containsObject:self.calendarManager.selectedDate];
+        if (self.calendarManager.selectedDate != nil) {
+            unsigned int flags = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit;
+            NSCalendar* calendar = [NSCalendar currentCalendar];
+            NSDateComponents* components = [calendar components:flags fromDate:self.calendarManager.selectedDate];
+            NSDate* dateOnly = [calendar dateFromComponents:components];
+            view.isSelected = [view.dates containsObject:dateOnly];
+        }
+
         // Doesn't need to do other weeks
         if (self.calendarManager.calendarAppearance.isWeekMode) {
             break;

@@ -18,4 +18,5 @@
 
 - (void)reloadData;
 - (void)reloadAppearance;
+- (void)selectWeekWithDate:(NSDate *)date;
 @end

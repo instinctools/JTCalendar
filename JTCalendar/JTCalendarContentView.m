@@ -118,6 +118,11 @@
 	}
 }
 
+- (void)selectWeekWithDate:(NSDate *)date {
+    self.calendarManager.selectedDate = date;
+    [self reloadData];
+}
+
 - (NSDate *)beginningOfMonth:(NSDate *)date {
 	NSCalendar *calendar = self.calendarManager.calendarAppearance.calendar;
 	NSDateComponents *componentsCurrentDate = [calendar components:NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitWeekday | NSCalendarUnitWeekOfMonth fromDate:date];
