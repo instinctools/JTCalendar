@@ -99,16 +99,17 @@
 }
 
 - (NSArray *)dates {
-    NSMutableArray *array = [[NSMutableArray alloc] init];
-    for (JTCalendarDayView *view in daysViews) {
-        unsigned int flags = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit;
-        NSCalendar* calendar = [NSCalendar currentCalendar];
-        NSDateComponents* components = [calendar components:flags fromDate:view.date];
-        NSDate* dateOnly = [calendar dateFromComponents:components];
-        [array addObject:dateOnly];
-    }
-    return array;
+	NSMutableArray *array = [[NSMutableArray alloc] init];
+	for (JTCalendarDayView *view in daysViews) {
+		unsigned int flags = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit;
+		NSCalendar *calendar = [NSCalendar currentCalendar];
+		NSDateComponents *components = [calendar components:flags fromDate:view.date];
+		NSDate *dateOnly = [calendar dateFromComponents:components];
+		[array addObject:dateOnly];
+	}
+	return array;
 }
+
 #pragma mark - JTCalendarManager
 
 - (void)setCalendarManager:(JTCalendar *)calendarManager {
@@ -119,15 +120,20 @@
 }
 
 - (void)reloadData {
-    self.isSelected = NO;
+	self.isSelected = NO;
 	for (JTCalendarDayView *view in daysViews) {
 		[view reloadData];
 	}
 }
 
--(void)setIsSelected:(BOOL)isSelected
-{
-    self.backgroundColor = isSelected == YES ? self.calendarManager.calendarAppearance.highlightWeekColor : self.calendarManager.calendarAppearance.unhighlightWeekColor;
+- (void)setIsSelected:(BOOL)isSelected {
+	if (isSelected) {
+        self.backgroundColor = self.calendarManager.calendarAppearance.selectedWeekViewBackgroundColor;
+		for (JTCalendarDayView *view in daysViews) {
+            view.textColor = self.calendarManager.calendarAppearance.selectedWeekTextColor;
+            view.textFont = self.calendarManager.calendarAppearance.selectedWeekTextFont;
+		}
+	}
 }
 
 - (void)reloadAppearance {
@@ -140,9 +146,8 @@
 	[self.delegate calendarWeekView:self didBeginTouchCalendarDayView:calendarDayView];
 }
 
--(void)calendarDayViewDidEndTouch:(JTCalendarDayView *)calendarDayView
-{
-    [self.delegate calendarWeekView:self didEndTouchCalendarDayView:calendarDayView];
+- (void)calendarDayViewDidEndTouch:(JTCalendarDayView *)calendarDayView {
+	[self.delegate calendarWeekView:self didEndTouchCalendarDayView:calendarDayView];
 }
 
 @end

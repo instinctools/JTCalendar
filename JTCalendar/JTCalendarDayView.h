@@ -21,6 +21,8 @@
 @property (nonatomic, weak) id <JTCalendarDayViewDelegate> delegate;
 @property (nonatomic) NSDate *date;
 @property (assign, nonatomic) BOOL isOtherMonth;
+@property (nonatomic, strong) UIFont *textFont;
+@property (nonatomic, strong) UIColor *textColor;
 
 - (void)reloadData;
 - (void)reloadAppearance;

@@ -119,8 +119,8 @@
 }
 
 - (void)selectWeekWithDate:(NSDate *)date {
-    self.calendarManager.selectedDate = date;
-    [self reloadData];
+	self.calendarManager.selectedDate = date;
+	[self reloadData];
 }
 
 - (NSDate *)beginningOfMonth:(NSDate *)date {
@@ -177,10 +177,10 @@
 }
 
 - (void)calendarMonthView:(JTCalendarMonthView *)calendarMonthView didBeginTouchCalendarMonthView:(JTCalendarWeekView *)calendarWeekView withCalendarDayView:(JTCalendarDayView *)calendarDayView {
-    if (self.calendarManager.calendarAppearance.highlightWeek) {
-        self.calendarManager.selectedDate = calendarDayView.date;
-        [calendarMonthView reloadData];
-    }
+	if (self.calendarManager.calendarAppearance.shouldHighlightWeek) {
+		self.calendarManager.selectedDate = calendarDayView.date;
+		[calendarMonthView reloadData];
+	}
 }
 
 - (void)calendarMonthView:(JTCalendarMonthView *)calendarMonthView didEndTouchCalendarMonthView:(JTCalendarWeekView *)calendarWeekView withCalendarDayView:(JTCalendarDayView *)calendarDayView {

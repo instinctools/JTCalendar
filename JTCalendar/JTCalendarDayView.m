@@ -89,6 +89,10 @@ static NSString *const kJTCalendarDaySelected = @"kJTCalendarDaySelected";
 	}
 }
 
+- (void)setTextColor:(UIColor *)textColor {
+	textLabel.textColor = textColor;
+}
+
 - (void)layoutSubviews {
 	[self configureConstraintsForSubviews];
 
@@ -136,7 +140,7 @@ static NSString *const kJTCalendarDaySelected = @"kJTCalendarDaySelected";
 }
 
 - (void)didTouch:(UITapGestureRecognizer *)recognizer {
-    [self.delegate calendarDayViewDidBeginTouch:self];
+	[self.delegate calendarDayViewDidBeginTouch:self];
 	if ([self.calendarManager.dataSource respondsToSelector:@selector(calendar:canSelectDate:)]) {
 		if (![self.calendarManager.dataSource calendar:self.calendarManager canSelectDate:self.date]) {
 			return;
@@ -186,7 +190,7 @@ static NSString *const kJTCalendarDaySelected = @"kJTCalendarDaySelected";
 	}
 
 	isSelected = selected;
-    
+
 	circleView.transform = CGAffineTransformIdentity;
 	CGAffineTransform tr = CGAffineTransformIdentity;
 	CGFloat opacity = 1.;
@@ -196,7 +200,6 @@ static NSString *const kJTCalendarDaySelected = @"kJTCalendarDaySelected";
 			circleView.color = [self.calendarManager.calendarAppearance dayCircleColorSelected];
 			textLabel.textColor = [self.calendarManager.calendarAppearance dayTextColorSelected];
 			dotView.color = [self.calendarManager.calendarAppearance dayDotColorSelected];
-            
 		}
 		else {
 			circleView.color = [self.calendarManager.calendarAppearance dayCircleColorSelectedOtherMonth];
@@ -230,7 +233,7 @@ static NSString *const kJTCalendarDaySelected = @"kJTCalendarDaySelected";
 
 		opacity = 0.;
 	}
-    
+
 	if (animated) {
 		[UIView animateWithDuration:.3 animations: ^{
 		    circleView.layer.opacity = opacity;
@@ -241,15 +244,14 @@ static NSString *const kJTCalendarDaySelected = @"kJTCalendarDaySelected";
 		circleView.layer.opacity = opacity;
 		circleView.transform = tr;
 	}
-    
-    if ( self.calendarManager.calendarAppearance.isFutureDaysAreAvailable == NO && [self.date timeIntervalSinceNow] > 0)
-    {
-        textLabel.textColor = [UIColor lightGrayColor];
-        self.userInteractionEnabled = NO;
-    }
-    else {
-        self.userInteractionEnabled = YES;
-    }
+
+	if (self.calendarManager.calendarAppearance.isSelectableFutureDays == NO && [self.date timeIntervalSinceNow] > 0) {
+		textLabel.textColor = [UIColor lightGrayColor];
+		self.userInteractionEnabled = NO;
+	}
+	else {
+		self.userInteractionEnabled = YES;
+	}
 }
 
 - (void)setIsOtherMonth:(BOOL)isOtherMonth {
@@ -259,8 +261,8 @@ static NSString *const kJTCalendarDaySelected = @"kJTCalendarDaySelected";
 
 - (void)reloadData {
 	BOOL selected = [self isSameDate:[self.calendarManager currentDateSelected]];
-    [self setSelected:selected animated:NO];
-    dotView.hidden = ![self.calendarManager.dataCache haveEvent:self.date];
+	[self setSelected:selected animated:NO];
+	dotView.hidden = ![self.calendarManager.dataCache haveEvent:self.date];
 }
 
 - (BOOL)isToday {

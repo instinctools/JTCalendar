@@ -11,10 +11,10 @@
 
 @interface JTCalendarAppearance : NSObject
 
-typedef NS_ENUM(NSInteger, JTCalendarWeekDayFormat) {
-    JTCalendarWeekDayFormatSingle,
-    JTCalendarWeekDayFormatShort,
-    JTCalendarWeekDayFormatFull
+	typedef NS_ENUM (NSInteger, JTCalendarWeekDayFormat) {
+	JTCalendarWeekDayFormatSingle,
+	JTCalendarWeekDayFormatShort,
+	JTCalendarWeekDayFormatFull
 };
 
 typedef NSString *(^JTCalendarMonthBlock)(NSDate *date, JTCalendar *jt_calendar);
@@ -226,9 +226,12 @@ typedef NSString *(^JTCalendarMonthBlock)(NSDate *date, JTCalendar *jt_calendar)
  */
 - (void)setDayTextColorForAll:(UIColor *)textColor;
 
-@property (nonatomic) BOOL highlightWeek;
+@property (nonatomic) BOOL shouldHighlightWeek;
 @property (nonatomic) BOOL showDefaultMenu;
-@property (nonatomic, strong) UIColor *highlightWeekColor;
-@property (nonatomic, strong) UIColor *unhighlightWeekColor;
-@property (nonatomic) BOOL isFutureDaysAreAvailable;
+@property (nonatomic, strong) UIColor *selectedWeekViewBackgroundColor;
+@property (nonatomic, strong) UIColor *selectedWeekTextColor;
+@property (nonatomic, strong) UIFont *selectedWeekTextFont;
+@property (nonatomic, strong) UIColor *weekViewBackgroundColor;
+@property (nonatomic) BOOL isSelectableFutureDays;
+
 @end
