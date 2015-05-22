@@ -93,6 +93,11 @@ static NSString *const kJTCalendarDaySelected = @"kJTCalendarDaySelected";
 	textLabel.textColor = textColor;
 }
 
+-(void)setTextFont:(UIFont *)textFont
+{
+    textLabel.font = textFont;
+}
+
 - (void)layoutSubviews {
 	[self configureConstraintsForSubviews];
 
