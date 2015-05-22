@@ -30,6 +30,7 @@
 		self.calendar.calendarAppearance.isSelectableFutureDays = NO;
 		self.calendar.calendarAppearance.shouldHighlightWeek = YES;
         self.calendar.calendarAppearance.selectedWeekTextColor = [UIColor orangeColor];
+        self.calendar.calendarAppearance.selectedWeekTextFont = [UIFont fontWithName:@"Helvetica-Bold" size:14];
 		// Customize the text for each month
 		self.calendar.calendarAppearance.monthBlock = ^NSString *(NSDate *date, JTCalendar *jt_calendar) {
 			NSCalendar *calendar = jt_calendar.calendarAppearance.calendar;

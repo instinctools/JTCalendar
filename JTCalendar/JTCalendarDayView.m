@@ -250,6 +250,7 @@ static NSString *const kJTCalendarDaySelected = @"kJTCalendarDaySelected";
 		circleView.transform = tr;
 	}
 
+    textLabel.font = self.calendarManager.calendarAppearance.dayTextFont;
 	if (self.calendarManager.calendarAppearance.isSelectableFutureDays == NO && [self.date timeIntervalSinceNow] > 0) {
 		textLabel.textColor = [UIColor lightGrayColor];
 		self.userInteractionEnabled = NO;
