@@ -236,7 +236,6 @@ typedef NSString *(^JTCalendarMonthBlock)(NSDate *date, JTCalendar *jt_calendar)
 @property (nonatomic, strong) UIColor *selectedWeekViewBackgroundColor;
 @property (nonatomic, strong) UIColor *selectedWeekTextColor;
 @property (nonatomic, strong) UIFont *selectedWeekTextFont;
-@property (nonatomic, strong) UIColor *weekViewBackgroundColor;
 @property (nonatomic) BOOL isSelectableFutureDays;
 
 @end
