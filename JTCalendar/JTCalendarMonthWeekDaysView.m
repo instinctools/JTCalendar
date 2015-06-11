@@ -121,6 +121,7 @@ static NSArray *cacheDaysOfWeeks;
 
 - (void)reloadAppearance
 {
+        self.backgroundColor = self.calendarManager.calendarAppearance.weekViewBackgroundColor;
     for(int i = 0; i < self.subviews.count; ++i){
         UILabel *view = [self.subviews objectAtIndex:i];
         

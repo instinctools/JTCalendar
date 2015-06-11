@@ -54,6 +54,7 @@
 
 	self.menuMonthTextColor = [UIColor blackColor];
 	self.weekDayTextColor = [UIColor colorWithRed:152. / 256. green:147. / 256. blue:157. / 256. alpha:1.];
+    self.weekViewBackgroundColor = [UIColor clearColor];
 
 	[self setDayDotColorForAll:[UIColor colorWithRed:43. / 256. green:88. / 256. blue:134. / 256. alpha:1.]];
 	[self setDayTextColorForAll:[UIColor blackColor]];

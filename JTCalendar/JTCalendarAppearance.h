@@ -82,6 +82,11 @@ typedef NSString *(^JTCalendarMonthBlock)(NSDate *date, JTCalendar *jt_calendar)
  */
 @property (nonatomic) UIFont *weekDayTextFont;
 
+/**
+ *  The default value of this property is clear color
+ */
+@property (nonatomic, copy) UIColor *weekViewBackgroundColor;
+
 #pragma mark - Day
 
 /**
