@@ -15,6 +15,9 @@
 	UILabel *textLabel;
 	JTCircleView *dotView;
 
+    UIImageView *startMonthView;
+    UIImageView *endMonthView;
+    
 	BOOL isSelected;
 
 	int cacheIsToday;
@@ -61,6 +64,20 @@ static NSString *const kJTCalendarDaySelected = @"kJTCalendarDaySelected";
 		[self addSubview:backgroundView];
 	}
 
+    {
+        startMonthView = [UIImageView new];
+        [startMonthView setImage:[UIImage imageNamed:@"start_month_calendar"]];
+        [self addSubview:startMonthView];
+        startMonthView.hidden = YES;
+    }
+    
+    {
+        endMonthView = [UIImageView new];
+        [endMonthView setImage:[UIImage imageNamed:@"end_month_calendar"]];
+        [self addSubview:endMonthView];
+        endMonthView.hidden = YES;
+    }
+    
 	{
 		circleView = [JTCircleView new];
 		[self addSubview:circleView];
@@ -123,6 +140,12 @@ static NSString *const kJTCalendarDaySelected = @"kJTCalendarDaySelected";
 	circleView.center = CGPointMake(self.frame.size.width / 2., self.frame.size.height / 2.);
 	circleView.layer.cornerRadius = sizeCircle / 2.;
 
+    startMonthView.frame = circleView.frame;
+    endMonthView.frame = circleView.frame;
+    
+    startMonthView.center = circleView.center;
+    endMonthView.center = circleView.center;
+    
 	dotView.frame = CGRectMake(0, 0, sizeDot, sizeDot);
 	dotView.center = CGPointMake(self.frame.size.width / 2., (self.frame.size.height / 2.) + sizeDot * 2.5);
 	dotView.layer.cornerRadius = sizeDot / 2.;
@@ -159,21 +182,30 @@ static NSString *const kJTCalendarDaySelected = @"kJTCalendarDaySelected";
 
 	[self.calendarManager.dataSource calendarDidDateSelected:self.calendarManager date:self.date];
 
-	if (!self.isOtherMonth || !self.calendarManager.calendarAppearance.autoChangeMonth) {
-		return;
-	}
-
-	NSInteger currentMonthIndex = [self monthIndexForDate:self.date];
-	NSInteger calendarMonthIndex = [self monthIndexForDate:self.calendarManager.currentDate];
-
-	currentMonthIndex = currentMonthIndex % 12;
-
-	if (currentMonthIndex == (calendarMonthIndex + 1) % 12) {
-		[self.calendarManager loadNextPage];
-	}
-	else if (currentMonthIndex == (calendarMonthIndex + 12 - 1) % 12) {
-		[self.calendarManager loadPreviousPage];
-	}
+    if ([self.calendarManager.dataSource respondsToSelector:@selector(calendar:needsToNavigateToNextMonth:)] &&
+        [self.calendarManager.dataSource respondsToSelector:@selector(calendar:needsToNavigateToPreviousMonth:)])
+    {
+        if ([self.calendarManager.dataSource calendar:self.calendarManager needsToNavigateToNextMonth:self.date]) {
+            [self.calendarManager loadNextPage];
+        } else if ([self.calendarManager.dataSource calendar:self.calendarManager needsToNavigateToPreviousMonth:self.date]) {
+            [self.calendarManager loadPreviousPage];
+        }
+    } else {
+        if (!self.isOtherMonth || !self.calendarManager.calendarAppearance.autoChangeMonth) {
+            return;
+        }
+        
+        NSInteger currentMonthIndex = [self monthIndexForDate:self.date];
+        NSInteger calendarMonthIndex = [self monthIndexForDate:self.calendarManager.currentDate];
+        
+        currentMonthIndex = currentMonthIndex % 12;
+        
+        if (currentMonthIndex == (calendarMonthIndex + 1) % 12) {
+            [self.calendarManager loadNextPage];
+        } else if (currentMonthIndex == (calendarMonthIndex + 12 - 1) % 12) {
+            [self.calendarManager loadPreviousPage];
+        }
+    }
 }
 
 - (void)didDaySelected:(NSNotification *)notification {
@@ -269,6 +301,8 @@ static NSString *const kJTCalendarDaySelected = @"kJTCalendarDaySelected";
 	BOOL selected = [self isSameDate:[self.calendarManager currentDateSelected]];
 	[self setSelected:selected animated:NO];
 	dotView.hidden = ![self.calendarManager.dataCache haveEvent:self.date];
+    startMonthView.hidden = ![self.calendarManager.dataCache startDate:self.date];
+    endMonthView.hidden = ![self.calendarManager.dataCache endDate:self.date];
 }
 
 - (BOOL)isToday {

@@ -119,6 +119,7 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)sender
 {
+    
     if(self.calendarAppearance.isWeekMode){
         return;
     }
@@ -160,6 +161,7 @@
 
 - (void)updatePage
 {
+    
     CGFloat pageWidth = CGRectGetWidth(self.contentView.frame);
     CGFloat fractionalPage = self.contentView.contentOffset.x / pageWidth;
         
@@ -170,6 +172,19 @@
         }
         self.contentView.scrollEnabled = YES;
         return;
+    }
+    
+    int pagesCount = ABS((NUMBER_PAGES_LOADED / 2) - fractionalPage);
+    for (int i = 0; i < pagesCount; i++) {
+        if(currentPage < (NUMBER_PAGES_LOADED / 2)){
+            if ([self.dataSource respondsToSelector:@selector(calendarWillLoadPreviousPage)]) {
+                [self.dataSource calendarWillLoadPreviousPage];
+            }
+        } else if(currentPage > (NUMBER_PAGES_LOADED / 2)){
+            if ([self.dataSource respondsToSelector:@selector(calendarWillLoadNextPage)]) {
+                [self.dataSource calendarWillLoadNextPage];
+            }
+        }
     }
     
     NSCalendar *calendar = self.calendarAppearance.calendar;
@@ -199,14 +214,15 @@
     }
     self.contentView.scrollEnabled = YES;
     
-    if(currentPage < (NUMBER_PAGES_LOADED / 2)){
-        if([self.dataSource respondsToSelector:@selector(calendarDidLoadPreviousPage)]){
-            [self.dataSource calendarDidLoadPreviousPage];
-        }
-    }
-    else if(currentPage > (NUMBER_PAGES_LOADED / 2)){
-        if([self.dataSource respondsToSelector:@selector(calendarDidLoadNextPage)]){
-            [self.dataSource calendarDidLoadNextPage];
+    for (int i = 0; i < pagesCount; i++) {
+        if(currentPage < (NUMBER_PAGES_LOADED / 2)){
+            if([self.dataSource respondsToSelector:@selector(calendarDidLoadPreviousPage)]){
+                [self.dataSource calendarDidLoadPreviousPage];
+            }
+        } else if(currentPage > (NUMBER_PAGES_LOADED / 2)){
+            if([self.dataSource respondsToSelector:@selector(calendarDidLoadNextPage)]){
+                [self.dataSource calendarDidLoadNextPage];
+            }
         }
     }
 }

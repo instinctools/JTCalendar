@@ -61,4 +61,20 @@
     return haveEvent;
 }
 
+- (BOOL)startDate:(NSDate *)date
+{
+    if ([self.calendarManager.dataSource respondsToSelector:@selector(calendar:isBeginMonthDate:)]) {
+        return [self.calendarManager.dataSource calendar:self.calendarManager isBeginMonthDate:date];
+    }
+    return NO;
+}
+
+- (BOOL)endDate:(NSDate *)date
+{
+    if ([self.calendarManager.dataSource respondsToSelector:@selector(calendar:isEndMonthDate:)]) {
+        return [self.calendarManager.dataSource calendar:self.calendarManager isEndMonthDate:date];
+    }
+    return NO;
+}
+
 @end

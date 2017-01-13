@@ -16,4 +16,7 @@
 - (void)reloadData;
 - (BOOL)haveEvent:(NSDate *)date;
 
+- (BOOL)startDate:(NSDate *)date;
+- (BOOL)endDate:(NSDate *)date;
+
 @end
