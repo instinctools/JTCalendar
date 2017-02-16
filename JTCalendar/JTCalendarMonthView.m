@@ -10,7 +10,7 @@
 #import "JTCalendarMonthWeekDaysView.h"
 #import "JTCalendarWeekView.h"
 
-#define WEEKS_TO_DISPLAY 8
+#define WEEKS_TO_DISPLAY 6
 
 @interface JTCalendarMonthView () <JTCalendarWeekViewDelegate> {
 	JTCalendarMonthWeekDaysView *weekdaysView;
@@ -141,11 +141,6 @@
 			currentMonthIndex = (currentMonthIndex % 12) + 1;
 		}
 	}
-
-    //for display previous week
-    NSDateComponents *dayComponent = [NSDateComponents new];
-    dayComponent.day = -7;
-    currentDate = [calendar dateByAddingComponents:dayComponent toDate:currentDate options:0];
     
 	for (NSUInteger i = 0; i < [weeksViews count]; i++) {
         JTCalendarWeekView *view = weeksViews[i];
